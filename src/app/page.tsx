@@ -16,6 +16,7 @@ export default function Home() {
       <Sponsors />
       <JoinSection />
       <FAQ />
+         
     </div>
   );
 }

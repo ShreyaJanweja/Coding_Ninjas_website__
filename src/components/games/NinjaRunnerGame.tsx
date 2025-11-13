@@ -124,6 +124,24 @@ const easeInOutCubic = (t: number) =>
 const clamp = (v: number, lo: number, hi: number) =>
   Math.max(lo, Math.min(hi, v));
 
+// Quotes displayed on losing the game
+const NINJA_QUOTES: string[] = [
+  "True mastery is an endless journey, not a final destination.",
+  "Embrace the shadows, but always strike toward the light.",
+  "The disciplined mind is a fortress no enemy can breach.",
+  "Silence your fears to hear the whispers of opportunity.",
+  "A patient warrior views obstacles as mere stepping stones.",
+  "Precision in action begins with clarity in thought.",
+  "Do not just face your challenges; become the shadow that overcomes them.",
+  "Agility of body is useless without an indomitable spirit.",
+  "The sharpest blade is the will that never dulls.",
+  "Your greatest victories are forged in the quiet dedication of your training.",
+];
+
+// UI colors
+const HUD_SCORE_TEXT_COLOR = "#38bdf8"; // cyan accent to match player
+const OVERLAY_QUOTE_COLOR = "#fbbf24"; // amber for Ninja Master + quote
+
 // AABB collision check
 function aabbIntersect(
   a: { x: number; y: number; width: number; height: number },
@@ -163,7 +181,9 @@ export default function NinjaRunnerGame({
   const [, setScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
+  const [loseQuote, setLoseQuote] = useState<string | null>(null);
   const scoreRef = useRef<number>(0);
+  const postedScoreRef = useRef<boolean>(false);
 
   // Persistent refs for game data (not causing rerenders)
   const playerRef = useRef<Player>({
@@ -241,6 +261,11 @@ export default function NinjaRunnerGame({
   // Helper: random in [a,b]
   function randRange(a: number, b: number) {
     return a + Math.random() * (b - a);
+  }
+
+  // Helper: pick a random item from an array
+  function pickRandom<T>(arr: T[]): T {
+    return arr[Math.floor(Math.random() * arr.length)];
   }
 
   // Spawn an obstacle in a random lane
@@ -610,6 +635,25 @@ export default function NinjaRunnerGame({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameOver, isPaused, width, height]);
 
+  // Submit score when game over (only once per round)
+  useEffect(() => {
+    if (!isGameOver || postedScoreRef.current) return;
+    postedScoreRef.current = true;
+    const submit = async () => {
+      const score = scoreRef.current;
+      try {
+        await fetch(`/api/highscore?game=NinjaRunner`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ score }),
+        });
+      } catch {
+        // ignore errors silently for UI
+      }
+    };
+    submit();
+  }, [isGameOver]);
+
   // Update simulation
   const update = (dt: number, logicalWidth: number, logicalHeight: number) => {
     // Scoring now based on coin collection
@@ -699,6 +743,7 @@ export default function NinjaRunnerGame({
     for (let i = 0; i < obs.length; i++) {
       const o = obs[i];
       if (aabbIntersect(playerBox, o)) {
+        setLoseQuote(pickRandom(NINJA_QUOTES));
         setIsGameOver(true);
         break;
       }
@@ -903,7 +948,7 @@ export default function NinjaRunnerGame({
     ctx.stroke();
     ctx.restore();
     // Draw score text atop
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = HUD_SCORE_TEXT_COLOR;
     ctx.fillText(scoreText, boxX + padX, boxY + padY);
 
     // Canvas no longer draws pause/game-over overlays; rendered via DOM
@@ -921,6 +966,8 @@ export default function NinjaRunnerGame({
     setScore(0);
     scoreRef.current = 0;
     setIsGameOver(false);
+    setLoseQuote(null);
+    postedScoreRef.current = false;
     flippingRef.current = false;
     flipElapsedRef.current = 0;
     const s = scaleRef.current;
@@ -990,12 +1037,30 @@ export default function NinjaRunnerGame({
                   marginBottom: 8,
                 }}
               >
-                {isGameOver ? "Game Over" : "Ninja Runner"}
+                {isGameOver ? (
+                  <>
+                    <span style={{ color: OVERLAY_QUOTE_COLOR }}>
+                      Ninja Master:{" "}
+                    </span>
+                    <span
+                      style={{
+                        fontStyle: "italic",
+                        fontWeight: 400,
+                        fontSize: 16,
+                        color: OVERLAY_QUOTE_COLOR,
+                      }}
+                    >
+                      {loseQuote ? "\u201C" + loseQuote + "\u201D" : ""}
+                    </span>
+                  </>
+                ) : (
+                  "Play Game"
+                )}
               </div>
               {isGameOver && (
                 <div
                   style={{
-                    color: "#ffffff",
+                    color: HUD_SCORE_TEXT_COLOR,
                     fontSize: 14,
                     textAlign: "center",
                     marginBottom: 6,
