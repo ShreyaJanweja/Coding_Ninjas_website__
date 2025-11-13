@@ -183,6 +183,7 @@ export default function NinjaRunnerGame({
   const [isPaused, setIsPaused] = useState(true);
   const [loseQuote, setLoseQuote] = useState<string | null>(null);
   const scoreRef = useRef<number>(0);
+  const postedScoreRef = useRef<boolean>(false);
 
   // Persistent refs for game data (not causing rerenders)
   const playerRef = useRef<Player>({
@@ -634,6 +635,25 @@ export default function NinjaRunnerGame({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameOver, isPaused, width, height]);
 
+  // Submit score when game over (only once per round)
+  useEffect(() => {
+    if (!isGameOver || postedScoreRef.current) return;
+    postedScoreRef.current = true;
+    const submit = async () => {
+      const score = scoreRef.current;
+      try {
+        await fetch(`/api/highscore?game=NinjaRunner`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ score }),
+        });
+      } catch {
+        // ignore errors silently for UI
+      }
+    };
+    submit();
+  }, [isGameOver]);
+
   // Update simulation
   const update = (dt: number, logicalWidth: number, logicalHeight: number) => {
     // Scoring now based on coin collection
@@ -947,6 +967,7 @@ export default function NinjaRunnerGame({
     scoreRef.current = 0;
     setIsGameOver(false);
     setLoseQuote(null);
+    postedScoreRef.current = false;
     flippingRef.current = false;
     flipElapsedRef.current = 0;
     const s = scaleRef.current;

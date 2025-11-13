@@ -37,9 +37,13 @@ Copy `.env.example` to `.env.local` and provide real values when available:
 ```
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 NEXT_PUBLIC_SITE_URL=https://your-production-url
+MONGODB_URI=mongodb+srv://<user>:<pass>@<cluster-url>
+MONGODB_DB=coding_ninjas
 ```
 
 `NEXT_PUBLIC_SITE_URL` powers SEO helpers (sitemap, RSS, OG images). Analytics is gated behind cookie consent and only initialises when `NEXT_PUBLIC_GA_ID` is present.
+
+High score storage for the Ninja Runner game uses MongoDB via the `MONGODB_URI` and `MONGODB_DB` settings. The API endpoint lives at `/api/highscore` and stores the single highest score per game (default `game=NinjaRunner`).
 
 ### Scripts
 

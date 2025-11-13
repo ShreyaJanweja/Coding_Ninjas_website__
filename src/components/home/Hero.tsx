@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CTAButton } from "../ui/CTAButton";
 import { motionDefaults } from "@/lib/motion";
@@ -17,8 +17,32 @@ const pressStart = Press_Start_2P({
 export const Hero = () => {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const [isCTAHovered, setIsCTAHovered] = useState(false);
+  const [highScore, setHighScore] = useState<number | null>(null);
   const gameHeight = isMobile ? 160 : 220;
-  const titleTop = `calc(((100% - (${gameHeight}px + 32px)) / 4) + 16px)`; // center between top and game top
+  const titleTop = `calc(((100% - (${gameHeight}px + 32px)) / 4) - 10px)`; // center between top and game top
+
+  useEffect(() => {
+    let mounted = true;
+    const load = async () => {
+      try {
+        const res = await fetch(`/api/highscore?game=NinjaRunner`, {
+          cache: "no-store",
+        });
+        const data = await res.json();
+        if (!mounted) return;
+        setHighScore(typeof data.score === "number" ? data.score : 0);
+      } catch {
+        if (!mounted) return;
+        setHighScore(0);
+      }
+    };
+    load();
+    const id = setInterval(load, 15000);
+    return () => {
+      mounted = false;
+      clearInterval(id);
+    };
+  }, []);
 
   return (
     <section className="relative pt-12 md:pt-20">
@@ -98,6 +122,15 @@ export const Hero = () => {
             >
               Ninja Runner
             </motion.div>
+            {/* High score under the title */}
+          </div>
+          <div
+            className="pointer-events-none absolute inset-x-0 z-20 mt-2 flex items-center justify-center"
+            style={{ top: `calc(${titleTop} + 38px)` }}
+          >
+            <div className="rounded-full border border-amber-300/40 bg-amber-50/10 px-3 py-1 text-xs font-semibold tracking-wider text-amber-200 backdrop-blur-sm">
+              High Score: {highScore ?? "--"}
+            </div>
           </div>
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <NinjaRunnerGame
