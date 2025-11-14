@@ -75,10 +75,10 @@ const PrivacyPage = () => (
       <p>
         For questions about this policy or to exercise your data rights, email{" "}
         <a
-          href="mailto:hello@codingninjaschitkara.com"
+          href="mailto:Cn.cuiet@chitkara.edu.in"
           className="text-primary"
         >
-          hello@codingninjaschitkara.com
+          Cn.cuiet@chitkara.edu.in
         </a>
         . We strive to respond within three business days.
       </p>

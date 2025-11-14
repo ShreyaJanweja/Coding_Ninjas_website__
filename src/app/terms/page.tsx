@@ -84,10 +84,10 @@ const TermsPage = () => (
       <p>
         Questions about these terms can be sent to{" "}
         <a
-          href="mailto:hello@codingninjaschitkara.com"
+          href="mailto:Cn.cuiet@chitkara.edu.in"
           className="text-primary"
         >
-          hello@codingninjaschitkara.com
+          Cn.cuiet@chitkara.edu.in
         </a>
         . We aim to reply within three business days.
       </p>

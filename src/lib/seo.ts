@@ -11,7 +11,7 @@ export const siteConfig = {
     "Coding Ninjas Chitkara is the Coding Ninjas for builders, designers, and innovators. We craft production-grade experiences, host high-impact events, and mentor the next generation of makers.",
   url: defaultUrl,
   ogImage: `${defaultUrl}/api/og`,
-  contactEmail: "hello@codingninjaschitkara.com",
+  contactEmail: "Cn.cuiet@chitkara.edu.in",
   social: {
     instagram: "https://instagram.com/codingninjas_chitkara",
     youtube: "https://youtube.com/@codingninjaschitkara",

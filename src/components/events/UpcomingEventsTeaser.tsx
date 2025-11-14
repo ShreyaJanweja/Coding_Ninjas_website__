@@ -42,11 +42,11 @@ export const UpcomingEventsTeaser = () => {
                     month: "short",
                     day: "numeric",
                   })}{" "}
-                  —{" "}
+                  {/* —{" "}
                   {new Date(event.endDate).toLocaleDateString("en-IN", {
                     month: "short",
                     day: "numeric",
-                  })}
+                  })} */}
                 </p>
                 <h3 className="text-xl font-heading text-foreground transition-colors group-hover:text-primary md:text-2xl">
                   {event.name}
@@ -58,7 +58,7 @@ export const UpcomingEventsTeaser = () => {
                   {event.location.name} · {event.location.address}
                 </p>
                 <a
-                  href={event.url}
+                  // href={event.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-sm font-semibold text-primary transition-all hover:translate-x-1 hover:text-primary/80"
