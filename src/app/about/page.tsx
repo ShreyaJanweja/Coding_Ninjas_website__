@@ -86,137 +86,6 @@ export default function AboutUsPage() {
         </div>
       </div>
 
-      {/* Advanced Animated Background */}
- <div className="fixed inset-0 overflow-hidden pointer-events-none">
-<MatrixCodeRain />
-
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `
-              radial-gradient(circle at 20% 20%, #FF6C0C 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, #FF8C3C 0%, transparent 50%),
-              radial-gradient(circle at 40% 80%, #FF6C0C 0%, transparent 50%)
-            `,
-            filter: 'blur(40px)'
-          }}
-        />
-
-        {[...Array(4)].map((_, i) => (
-          <NinjaStar key={i} index={i} parallaxX={parallaxX} parallaxY={parallaxY} />
-        ))}
-
-        <CircuitBoardPattern />
-
-        <motion.div
-          animate={{ 
-            rotate: 360,
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ 
-            rotate: { duration: 40, repeat: Infinity, ease: "linear" }, // Was 20
-            scale: { duration: 15, repeat: Infinity } // Was 8
-          }}
-          className="absolute top-1/4 left-1/4 w-48 sm:w-96 h-48 sm:h-96 border border-[#FF6C0C] opacity-5 rounded-full"
-          style={{ x: parallaxX * 0.5, y: parallaxY * 0.5 }}
-        />
-
-        <motion.div
-          animate={{ 
-            rotate: -360,
-            scale: [1.1, 1, 1.1]
-          }}
-          transition={{ 
-            rotate: { duration: 50, repeat: Infinity, ease: "linear" }, // Was 25
-            scale: { duration: 12, repeat: Infinity } // Was 6
-          }}
-          className="absolute bottom-1/4 right-1/4 w-40 sm:w-80 h-40 sm:h-80 border border-[#FF8C3C] opacity-5 rounded-full"
-          style={{ x: -parallaxX * 0.3, y: -parallaxY * 0.3 }}
-        />
-
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div className="w-full h-full" style={{
-            backgroundImage: `
-              linear-gradient(90deg, #FF6C0C 1px, transparent 1px),
-              linear-gradient(180deg, #FF6C0C 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px',
-          }}/>
-      _ </div>
-
-        {Array.from({ length: 5 }, (_, i) => {
-          const positions = [
-            { left: 5, top: 10, duration: 3.2, delay: 0.4 },
-            { left: 15, top: 30, duration: 4.1, delay: 1.2 },
-            { left: 25, top: 50, duration: 3.8, delay: 0.8 },
-            { left: 35, top: 20, duration: 4.5, delay: 1.6 },
-            { left: 45, top: 40, duration: 3.5, delay: 0.2 },
-          ];
-          
-          const pos = positions[i];
-          
-        return (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-[#FF6C0C] rounded-full opacity-30"
-              style={{
-                left: `${pos.left}%`,
-                top: `${pos.top}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.3, 0.8, 0.3],
-              }}
-              transition={{
-                duration: pos.duration * 3, // Was pos.duration
-                repeat: Infinity,
-                delay: pos.delay,
-              }}
-            />
-          );
-        })}
-      </div>      
-
-      {/* Enhanced Responsive Navigation */}
-      {/* <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, type: "spring" }}
-        className={`fixed top-4 sm:top-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ${
-          isScrolled ? 'top-2 sm:top-6 scale-95' : 'top-4 sm:top-8'
-        }`}
-      >
-        <motion.div 
-          className={`flex gap-1 bg-black/80 backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl px-3 sm:px-6 py-2 sm:py-3 shadow-2xl transition-all duration-500 ${
-            isScrolled ? 'shadow-[#FF6C0C]/20 scale-95' : 'shadow-[#FF6C0C]/10'
-          }`}
-          whileHover={{ scale: 1.02 }}
-        >
-          {[
-            { id: "hero", label: "Dojo", icon: Sword },
-            { id: "pillars", label: "Sensei", icon: Brain },
-            { id: "leadership", label: "Shinobi", icon: Target },
-            { id: "directors", label: "Operatives", icon: Terminal },
-            { id: "philosophy", label: "Code", icon: Code }
-          ].map((item) => (
-            <motion.button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className={`flex items-center gap-1 sm:gap-3 px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-300 border text-xs sm:text-sm font-medium ${
-                activeSection === item.id 
-                  ? "bg-gradient-to-r from-[#FF6C0C] to-[#FF8C3C] text-black border-[#FF6C0C] shadow-lg" 
-                  : "text-white/80 hover:text-white border-transparent hover:border-[#FF6C0C]/30 hover:bg-white/5"
-              }`}
-            >
-              <item.icon className={`w-3 h-3 sm:w-4 sm:h-4 ${activeSection === item.id ? "text-black" : "text-[#FF6C0C]"}`} />
-              <span className="hidden sm:inline">{item.label}</span>
-            </motion.button>
-          ))}
-        </motion.div>
-      </motion.nav> */}
-
       {/* Premium Hero Section */}
 <section
   id="hero"
@@ -618,50 +487,11 @@ export default function AboutUsPage() {
           />
         )}
       </AnimatePresence>
-
-      {/* NINJA FOOTER */}
-      {/* <footer className="relative border-t border-white/10 py-12 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-6 sm:mb-8"
-          >
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
-              Coding Ninjas <span className="text-[#FF6C0C]">CUIET</span>
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Mastering the art of code, one line at a time. Where innovation meets discipline, 
-              and technology becomes our weapon of choice.
-            </p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex justify-center gap-4 sm:gap-6"
-          >
-            <motion.a whileHover={{ scale: 1.1 }} href="#" className="p-2 sm:p-3 bg-white/5 rounded-lg sm:rounded-xl hover:bg-[#FF6C0C] transition-colors">
-              <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-            </motion.a>
-            <motion.a whileHover={{ scale: 1.1 }} href="#" className="p-2 sm:p-3 bg-white/5 rounded-lg sm:rounded-xl hover:bg-[#FF6C0C] transition-colors">
-              <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-            </motion.a>
-            <motion.a whileHover={{ scale: 1.1 }} href="#" className="p-2 sm:p-3 bg-white/5 rounded-lg sm:rounded-xl hover:bg-[#FF6C0C] transition-colors">
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
-            </motion.a>
-          </motion.div>
-        </div>
-      </footer> */}
     </main>
   );
 }
 
 /* NINJA PHILOSOPHY GRID COMPONENT */
-
 function NinjaPhilosophyGrid() {
   const philosophies = [
     {
@@ -771,112 +601,6 @@ function NinjaPhilosophyGrid() {
     </div>
   );
 }
-
-
-// ... (MatrixCodeRain, NinjaStar, CircuitBoardPattern, NinjaMantra components remain the same with responsive updates)
-
-/* MATRIX CODE RAIN COMPONENT */
-function MatrixCodeRain() {
-   const [isClient, setIsClient] = useState(false);
-
-   useEffect(() => {
-      setIsClient(true);
-   }, []);
-
-   if (!isClient) return null;
-
-  {/* --- FIX 6: Reduced number of rain streams from 10 to 5 --- */}
-   const positions = [
-      { left: 10, delay: 0 }, { left: 30, delay: 2 }, { left: 50, delay: 1 },
-      { left: 70, delay: 3 }, { left: 90, delay: 4 }
-   ];
-
-   return (
-      <div className="absolute inset-0 opacity-10">
-         {positions.map((pos, i) => (
-            <motion.div
-               key={i}
-               className="absolute text-[#FF6C0C] font-mono text-xs"
-               style={{
-                  left: `${pos.left}%`,
-               }}
-               animate={{
-                  y: [0, 1000],
-                  opacity: [0, 1, 0],
-               }}
-               transition={{
-                  duration: 15 + (i % 3), // Was 10 + (i % 5)
-                  repeat: Infinity,
-                  delay: pos.delay,
-               }}
-            >
-               {i % 2 === 0 ? "1" : "0"}
-            </motion.div>
-         ))}
-      </div>
-   );
-}
-
-function NinjaStar({ index, parallaxX, parallaxY }: any) {
-   const positions = [
-      { left: 10, top: 20 }, { left: 25, top: 40 }, { left: 40, top: 60 },
-      { left: 55, top: 30 }, { left: 70, top: 50 }, { left: 85, top: 70 },
-      { left: 15, top: 80 }, { left: 30, top: 25 }
-   ];
-    
-   const pos = positions[index] || { left: 50, top: 50 };
-
-   return (
-      <motion.div
-         animate={{  
-            rotate: 360,
-    y: [0, -50, 0],
-            x: [0, 20, 0]
-         }}
-         transition={{  
-            rotate: { duration: 10 + index, repeat: Infinity, ease: "linear" }, // Was 4 + index
-            y: { duration: 8 + index * 0.5, repeat: Infinity }, // Was 3 + index * 0.5
-            x: { duration: 7 + index * 0.3, repeat: Infinity } // Was 2 + index * 0.3
-         }}
-         className="absolute text-[#FF6C0C] opacity-30"
-         style={{
-            left: `${pos.left}%`,
-            top: `${pos.top}%`,
-         x: parallaxX * (0.2 + index * 0.05),
-            y: parallaxY * (0.2 + index * 0.05)
-         }}
-      >
-         <svg width="16" height="16" className="hidden sm:block" viewBox="0 0 24 24" fill="currentColor">
-         <path d="M12 2L9 12 2 12 8 17 5 22 12 17 19 22 16 17 22 12 15 12 12 2Z"/>
-         </svg>
-      </motion.div>
-   );
-}
-/* CIRCUIT BOARD PATTERN */
-function CircuitBoardPattern() {
-  return (
-    <div className="absolute inset-0 opacity-5">
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="circuit" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-            <path d="M0 25 H50 M25 0 V50" stroke="#FF6C0C" strokeWidth="1" fill="none"/>
-            <circle cx="12.5" cy="12.5" r="1" fill="#FF6C0C"/>
-            <circle cx="37.5" cy="37.5" r="1" fill="#FF6C0C"/>
-            <circle cx="12.5" cy="37.5" r="1" fill="#FF6C0C"/>
-            <circle cx="37.5" cy="12.5" r="1" fill="#FF6C0C"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#circuit)" />
-      </svg>
-    </div>
-  );
-}
-
-
-
-
-
-
 
 /* NINJA MANTRA COMPONENT */
 function NinjaMantra() {
@@ -1451,7 +1175,7 @@ const leadershipTeam = [
   { 
     name: "Aditya Pathania", 
     role: "Chief Executive Officer", 
-    img: "/team/aditya.png", 
+    img: "/team/aditya1.png", 
     linkedin: "#", 
     insta: "#", 
     bio: "Aditya Pathania, as Chief Executive Officer, drives the operational excellence and strategic vision of Coding Ninjas CUIET. His exceptional leadership ensures seamless execution of all technical initiatives and learning programs. With a keen eye for innovation and process optimization, he has implemented efficient workflows that enhance member experience and learning outcomes. Aditya's commitment to technological advancement and community building has positioned the club as a hub for cutting-edge development practices and collaborative problem-solving among students."
@@ -1459,7 +1183,7 @@ const leadershipTeam = [
   { 
     name: "Anishka", 
     role: "Operations and HR Director", 
-    img: "/team/anishka.png", 
+    img: "/team/anishka2.png", 
     linkedin: "#", 
     insta: "#", 
     bio: "Anishka, as Operations and HR Director, cultivates a thriving organizational culture while ensuring operational efficiency across all departments. Her innovative HR practices and talent management strategies have built a cohesive team of passionate developers and tech enthusiasts. With exceptional interpersonal skills and systematic approach to workflow optimization, she creates an inclusive environment where every member can grow and contribute effectively. Anishka's dedication to team development and process improvement has been crucial in maintaining the club's dynamic and productive atmosphere."
@@ -1491,22 +1215,22 @@ const leadershipTeam = [
 ];
 
 const directors = [
-  { name: "Archita", role: "HR Manager", img: "/team/anusha.jpg", linkedin: "#", insta: "#", bio: "As HR Manager, Archita oversees talent management and organizational development, ensuring smooth team coordination and member engagement through effective human resource strategies and interpersonal communication." },
-  { name: "Jaskirat", role: "Secretary", img: "/team/hiya.jpg", linkedin: "#", insta: "#", bio: "Jaskirat serves as Secretary, maintaining organizational records and facilitating inter-departmental communication while ensuring efficient documentation and administrative support for all club activities and initiatives." },
-  { name: "Manya", role: "Joint Secretary", img: "/team/arnav.jpg", linkedin: "#", insta: "#", bio: "Manya, as Joint Secretary, supports secretarial functions and coordinates departmental activities while assisting in maintaining organizational efficiency and smooth operational workflow across all teams." },
-  { name: "Mohit", role: "Community Coordinator", img: "/team/smriti.jpg", linkedin: "#", insta: "#", bio: "Mohit builds and nurtures the coding community as Community Coordinator, fostering engagement and collaboration among members while organizing interactive sessions and networking opportunities." },
-  { name: "Akshat Anand", role: "Events Director", img: "/team/aditya.jpg", linkedin: "#", insta: "#", bio: "Akshat Anand plans and executes technical events as Events Director, coordinating hackathons and workshops while ensuring seamless organization and participant engagement in all activities." },
-  { name: "Himani Batra", role: "Events Director", img: "/team/siya.jpg", linkedin: "#", insta: "#", bio: "Himani Batra manages event coordination and participant experience as Events Director, creating engaging technical competitions and learning sessions that foster skill development." },
+  { name: "Archita", role: "HR Manager", img: "/team/archita1.png", linkedin: "#", insta: "#", bio: "As HR Manager, Archita oversees talent management and organizational development, ensuring smooth team coordination and member engagement through effective human resource strategies and interpersonal communication." },
+  { name: "Jaskirat", role: "Secretary", img: "/team/jaskirat1.png", linkedin: "#", insta: "#", bio: "Jaskirat serves as Secretary, maintaining organizational records and facilitating inter-departmental communication while ensuring efficient documentation and administrative support for all club activities and initiatives." },
+  { name: "Manya", role: "Joint Secretary", img: "/team/manya1.png", linkedin: "#", insta: "#", bio: "Manya, as Joint Secretary, supports secretarial functions and coordinates departmental activities while assisting in maintaining organizational efficiency and smooth operational workflow across all teams." },
+  { name: "Mohit", role: "Community Coordinator", img: "/team/mohit.png", linkedin: "#", insta: "#", bio: "Mohit builds and nurtures the coding community as Community Coordinator, fostering engagement and collaboration among members while organizing interactive sessions and networking opportunities." },
+  { name: "Akshat Anand", role: "Events Director", img: "/team/akshat1.png", linkedin: "#", insta: "#", bio: "Akshat Anand plans and executes technical events as Events Director, coordinating hackathons and workshops while ensuring seamless organization and participant engagement in all activities." },
+  { name: "Himani Batra", role: "Events Director", img: "/team/himani1.png", linkedin: "#", insta: "#", bio: "Himani Batra manages event coordination and participant experience as Events Director, creating engaging technical competitions and learning sessions that foster skill development." },
   { name: "Bhavyan", role: "Technical Advisor", img: "/team/bhavyan.png", linkedin: "#", insta: "#", bio: "Bhavyan provides technical guidance and mentorship as Technical Advisor, offering expertise in programming concepts and development practices to enhance member learning outcomes." },
-  { name: "Ashita", role: "Outreach Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Ashita leads outreach initiatives as Outreach Director, building partnerships with external organizations and expanding the club's network within the broader tech community." },
-  { name: "Harshil Mahajan", role: "Outreach Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Harshil Mahajan develops strategic partnerships as Outreach Director, establishing valuable connections with industry professionals and tech companies for collaborative opportunities." },
-  { name: "Ankit", role: "Outreach Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Ankit expands community engagement as Outreach Director, coordinating with external stakeholders and organizing collaborative events that bridge academia and industry." },
-  { name: "Roshnee Loona", role: "Content Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Roshnee Loona oversees content creation as Content Director, developing educational materials and technical documentation that support member learning and skill development." },
-  { name: "Sarthak Dey", role: "Documentation Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Sarthak Dey manages organizational documentation as Documentation Director, maintaining records and creating comprehensive reports that track club activities and achievements." },
-  { name: "Abhinav", role: "Media Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Abhinav coordinates media production as Media Director, overseeing content creation and distribution across various platforms to enhance club visibility and engagement." },
-  { name: "Sehaj", role: "Media Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Sehaj manages digital media operations as Media Director, creating engaging content and maintaining consistent brand presence across all communication channels." },
-  { name: "Apran", role: "Social Media Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Apran leads social media strategy as Social Media Director, developing engaging content and managing online presence to build community interaction and awareness." },
-  { name: "Sukhpreet Singh", role: "Graphics Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Sukhpreet Singh creates visual assets as Graphics Director, designing compelling graphics and visual content that enhance club branding and communication materials." },
-  { name: "Kashak", role: "Logistics Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Kashak manages operational logistics as Logistics Director, coordinating resources and facilities to ensure smooth execution of all club events and activities." },
-  { name: "Harshil", role: "Marketing Director", img: "/team/vansh.jpg", linkedin: "#", insta: "#", bio: "Harshil develops marketing strategies as Marketing Director, creating campaigns that promote club initiatives and attract participation from the student community." },
+  { name: "Ashita", role: "Outreach Director", img: "/team/ashita1.png", linkedin: "#", insta: "#", bio: "Ashita leads outreach initiatives as Outreach Director, building partnerships with external organizations and expanding the club's network within the broader tech community." },
+  { name: "Harshil Mahajan", role: "Outreach Director", img: "/team/harshilM1.png", linkedin: "#", insta: "#", bio: "Harshil Mahajan develops strategic partnerships as Outreach Director, establishing valuable connections with industry professionals and tech companies for collaborative opportunities." },
+  { name: "Ankit", role: "Outreach Director", img: "/team/ankit2.png", linkedin: "#", insta: "#", bio: "Ankit expands community engagement as Outreach Director, coordinating with external stakeholders and organizing collaborative events that bridge academia and industry." },
+  { name: "Roshnee Loona", role: "Content Director", img: "/team/roshnee.png", linkedin: "#", insta: "#", bio: "Roshnee Loona oversees content creation as Content Director, developing educational materials and technical documentation that support member learning and skill development." },
+  { name: "Sarthak Dey", role: "Documentation Director", img: "/team/sarthak.png", linkedin: "#", insta: "#", bio: "Sarthak Dey manages organizational documentation as Documentation Director, maintaining records and creating comprehensive reports that track club activities and achievements." },
+  { name: "Abhinav", role: "Media Director", img: "/team/abhinav.png", linkedin: "#", insta: "#", bio: "Abhinav coordinates media production as Media Director, overseeing content creation and distribution across various platforms to enhance club visibility and engagement." },
+  { name: "Sehaj", role: "Media Director", img: "/team/sehaj.png", linkedin: "#", insta: "#", bio: "Sehaj manages digital media operations as Media Director, creating engaging content and maintaining consistent brand presence across all communication channels." },
+  { name: "Apran", role: "Social Media Director", img: "/team/apran1.png", linkedin: "#", insta: "#", bio: "Apran leads social media strategy as Social Media Director, developing engaging content and managing online presence to build community interaction and awareness." },
+  { name: "Sukhpreet Singh", role: "Graphics Director", img: "/team/sukhpreet1.png", linkedin: "#", insta: "#", bio: "Sukhpreet Singh creates visual assets as Graphics Director, designing compelling graphics and visual content that enhance club branding and communication materials." },
+  { name: "Kashak", role: "Logistics Director", img: "/team/kashak1.png", linkedin: "#", insta: "#", bio: "Kashak manages operational logistics as Logistics Director, coordinating resources and facilities to ensure smooth execution of all club events and activities." },
+  { name: "Harshil", role: "Marketing Director", img: "/team/harshil2.png", linkedin: "#", insta: "#", bio: "Harshil develops marketing strategies as Marketing Director, creating campaigns that promote club initiatives and attract participation from the student community." },
 ];
