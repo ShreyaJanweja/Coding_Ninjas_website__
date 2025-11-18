@@ -1,5 +1,3 @@
-// bg
-
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -641,6 +639,9 @@ function EnhancedPillarCard({ member, index, onClick }: any) {
     <motion.div
       whileHover={{ scale: 1.03, y: -10 }}
       className="relative group cursor-pointer h-full min-h-[500px] sm:min-h-[550px] md:min-h-[600px] bg-gradient-to-br from-black to-gray-900 border-2 border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden border-[#FF6C0C]/30 hover:border-[#FF6C0C] transition-all duration-700 flex flex-col shadow-2xl shadow-black/50 w-full mx-auto" // Removed mx-1 sm:mx-2, added mx-auto
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       {/* Image Container */}
       <motion.div
