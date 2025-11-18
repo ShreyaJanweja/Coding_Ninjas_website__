@@ -24,6 +24,7 @@ export const navigationLinks = [
   { label: "About Us", href: "/about" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },
+  {label: "Credits", href: "/credits" },
 ];
 
 export const getDefaultMetadata = (): Metadata => ({
