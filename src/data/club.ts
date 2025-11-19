@@ -27,7 +27,7 @@ export const timeline = [
     title: "Coding Ninjas Club Launches",
     description:
       "Campus innovators formed the first cohort, hosting weekly coding meetups focused on clean architecture and design principles.",
-    image: undefined, // Placeholder - will be replaced with actual images
+    image: undefined,
   },
   {
     year: "2018",
@@ -79,12 +79,12 @@ export const achievements = [
   },
   {
     metric: "Speaker Sessions",
-    value: 45,
+    value: 20,
     suffix: "+",
   },
   {
     metric: "Active Members",
-    value: 320,
+    value: 100,
     suffix: "+",
   },
 ];
